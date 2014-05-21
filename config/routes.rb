@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   get '/search' => 'songs#search'
 
-  resources :users
+  resources :users, except: [:index]
   resources :sessions, only: [:create]
 
   get '/signup' => 'users#new'

@@ -1,10 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_signin, except: [:new, :create]
   before_action :find_user, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @users = User.all
-  end
+  before_action :require_current_user, except: [:new, :create]
 
   def new
     @user = User.new
@@ -52,5 +49,11 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation
     )
+  end
+
+  def require_current_user
+    if !current_user?(@user)
+      redirect_to root_path
+    end
   end
 end
