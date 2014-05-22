@@ -2,6 +2,10 @@ class SongsController < ApplicationController
   before_action(:load_artist, only: [:new, :create] )
   before_action(:load_song, { only: [:edit, :update, :destroy] })
 
+  def index
+    @songs = current_user.songs
+  end
+
   def new
     @song = Song.new
   end

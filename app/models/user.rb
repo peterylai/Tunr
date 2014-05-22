@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
 
   # Validating positive balance
-  validates :balance, numericality: { greater_than_or_equal_to: 0}
+  validates :balance, numericality: { greater_than_or_equal_to: 0 }
 
   # Secure password features:
   has_secure_password
@@ -32,6 +32,13 @@ class User < ActiveRecord::Base
   # Hash a token:
   def User.hash(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def purchase(song)
+    if update(balance: balance - song.price)
+      # Purchase.create(user_id: self.id, song_id: song.id)
+      songs << song
+    end
   end
 
   private

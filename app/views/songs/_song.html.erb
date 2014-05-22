@@ -1,11 +1,22 @@
 <%= song.title %>
 <%= song.year %>
+
 <% if song.preview_url %>
   <audio controls>
     <source src="<%= song.preview_url %>">
   </audio>
 <% end %>
-<%= link_to "Edit Song", edit_song_path(song) %>
-<%= form_for song, method: 'delete' do |f| %>
-  <%= f.submit "Remove Song", id: "delete-song-#{song.id}" %>
+
+<% if signed_in? %>
+
+  <%= form_tag(song_purchases_path(song), method: :post) do %>
+    <%= submit_tag 'Purchase' %>
+  <% end %>
+
+  <%= link_to "Edit Song", edit_song_path(song) %>
+
+  <%= form_for song, method: 'delete' do |f| %>
+    <%= f.submit "Remove Song", id: "delete-song-#{song.id}" %>
+  <% end %>
+
 <% end %>
