@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+
+  has_many :purchases, dependent: :destroy
+  has_many :songs, through: :purchases
+
   # Add handlers to run when creating and saving
   before_create :create_remember_token
   before_save :normalize_fields
@@ -13,6 +17,9 @@ class User < ActiveRecord::Base
     presence: true,
     uniqueness: { case_sensitive: false },
     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+
+  # Validating positive balance
+  validates :balance, numericality: { greater_than_or_equal_to: 0}
 
   # Secure password features:
   has_secure_password

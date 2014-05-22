@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "an admin can manage artists" do
-  let!(:beyonce) { Artist.create(:name => "Beyonce", :genre => "Pop", :photo_url => "http://www.tickpick.com/DesktopModules/SearchResults/img/performers/beyonce.jpg")}
+  let!(:beyonce) { FactoryGirl.create(:artist)}
   
   it "can create a new artist" do
     visit new_artist_path
@@ -14,7 +14,7 @@ describe "an admin can manage artists" do
 
   it "can view an existing artist" do
     visit artist_path(beyonce)
-    expect(page).to have_content "Beyonce"
+    expect(page).to have_content beyonce.name
   end
 
   it "can update an artist" do
@@ -27,7 +27,7 @@ describe "an admin can manage artists" do
   it "can destroy an artist" do
     visit artist_path(beyonce)
     click_button("destroy")
-    expect(page).to_not have_content("Beyonce")
+    expect(page).to_not have_content(beyonce.name)
   end
 
 end
