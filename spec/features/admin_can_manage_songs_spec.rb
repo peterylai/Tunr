@@ -6,10 +6,10 @@ describe "an admin can manage songs" do
 
   it "can create a new song" do
     visit new_artist_song_path(beyonce)
-    fill_in "song_title", with: "Single Ladies"
+    fill_in "song_title", with: "halo"
     fill_in "song_year", with: "2008"
     click_button("submit")
-    expect(page).to have_content "Single Ladies"
+    expect(page).to have_content "halo"
   end
 
   it "can view an existing song" do
