@@ -1,5 +1,4 @@
 <h1>Songs Purchased</h1>
 <% @songs.each do |song| %>
-  <%= song.title %>
   <iframe src="https://embed.spotify.com/?uri=<%= song.spotify_uri%>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
 <% end %>

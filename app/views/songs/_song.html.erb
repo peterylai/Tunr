@@ -1,5 +1,4 @@
-<%= song.title %>
-<%= song.year %>
+<p><%= song.title %> : <%= song.year %></p>
 
 <% if song.preview_url %>
   <audio controls>
@@ -8,6 +7,8 @@
 <% end %>
 
 <% if signed_in? %>
+
+  <p>Price: <%= song.price %></p>
 
   <%= form_tag(song_purchases_path(song), method: :post) do %>
     <%= submit_tag 'Purchase' %>
