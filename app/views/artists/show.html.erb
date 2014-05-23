@@ -3,8 +3,11 @@
 <br/>
 
 <h1><%= @artist.name %></h1>
-<%= form_for @artist, method: 'delete' do |f| %>
-  <%= f.submit "Remove Artist", id: "destroy" %>
+
+<% if signed_in? %>
+  <%= form_for @artist, method: 'delete' do |f| %>
+    <%= f.submit "Remove Artist", id: "destroy" %>
+  <% end %>
 <% end %>
 
 <%= image_tag @artist.photo_url, width: "300px" %>

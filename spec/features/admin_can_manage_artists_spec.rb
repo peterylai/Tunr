@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe "an admin can manage artists" do
-  let!(:beyonce) { FactoryGirl.create(:artist)}
+  let(:user) { FactoryGirl.create(:user) }
+  let(:beyonce) { FactoryGirl.create(:artist) }
   
   it "can create a new artist" do
     visit new_artist_path
@@ -25,9 +26,17 @@ describe "an admin can manage artists" do
   end
 
   it "can destroy an artist" do
+    login(user)
     visit artist_path(beyonce)
     click_button("destroy")
     expect(page).to_not have_content(beyonce.name)
+  end
+
+  def login(user)
+    visit "/signin"
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
+    click_button "Sign in"
   end
 
 end
