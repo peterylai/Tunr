@@ -14,6 +14,7 @@ class SongsController < ApplicationController
     @song = Song.new(song_params)
     @song.artist = @artist
     @song.preview_url = get_preview_url(@artist, @song)
+    @song.spotify_uri = get_spotify_uri(@song)
     @song.save
 
     redirect_to artist_path(@artist)
@@ -56,5 +57,11 @@ class SongsController < ApplicationController
     response = HTTParty.get("https://itunes.apple.com/search?term=#{artist}+#{song}&media=music&entity=musicTrack&limit=1")
     response_hash = JSON(response)
     return response_hash["results"][0]["previewUrl"]
+  end
+
+  def get_spotify_uri(song)
+    song = song.title.gsub(" ", "+")
+    response = HTTParty.get("http://ws.spotify.com/search/1/track.json?q=#{song}")
+    return response["tracks"][0]["href"]
   end
 end
