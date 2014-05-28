@@ -3,14 +3,15 @@ require 'spec_helper'
 describe "an admin can manage artists" do
   let(:user) { FactoryGirl.create(:user) }
   let(:beyonce) { FactoryGirl.create(:artist) }
+  let(:kesha) {FactoryGirl.build(:artist)}
   
   it "can create a new artist" do
     visit new_artist_path
-    fill_in "artist_name", with: "Kesha"
-    fill_in "artist_genre", with: "garbage"
-    fill_in "artist_photo_url", with: "http://www.mardecortesbaja.com/wordpress/wp-content/uploads/bald-clown-cap-64403.jpg"
+    fill_in "artist_name", with: kesha.name
+    fill_in "artist_genre", with: kesha.genre
+    fill_in "artist_photo_url", with: kesha.photo_url
     click_button("submit")
-    expect(page).to have_content "Kesha"
+    expect(page).to have_content kesha.name
   end
 
   it "can view an existing artist" do

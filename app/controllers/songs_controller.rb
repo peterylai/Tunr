@@ -56,12 +56,12 @@ class SongsController < ApplicationController
     song = song.title.gsub(" ", "+")
     response = HTTParty.get("https://itunes.apple.com/search?term=#{artist}+#{song}&media=music&entity=musicTrack&limit=1")
     response_hash = JSON(response)
-    return response_hash["results"][0]["previewUrl"]
+    response_hash["results"][0] ? response_hash["results"][0]["previewUrl"] : ""
   end
 
   def get_spotify_uri(song)
     song = song.title.gsub(" ", "+")
     response = HTTParty.get("http://ws.spotify.com/search/1/track.json?q=#{song}")
-    return response["tracks"][0]["href"]
+    response["tracks"][0] ? response["tracks"][0]["href"] : ""
   end
 end
