@@ -12,7 +12,7 @@
 * Ruby on Rails 4.1.1
 * PostgreSQL Database
 * Authentication & Authorization from scratch using [bcrypt-ruby](http://bcrypt-ruby.rubyforge.org/)
-* [iTunes search API](https://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html) & [HTTParty](https://github.com/jnunemaker/httparty)
+* [iTunes search API](https://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html), [Spotify API](https://developer.spotify.com/technologies/web-api/) & [HTTParty](https://github.com/jnunemaker/httparty)
 * Testing using using [rspec-rails](https://github.com/rspec/rspec-rails), [capybara](https://github.com/jnicklas/capybara), [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers) and [factory_girl_rails](https://github.com/thoughtbot/factory_girl_rails)
 
 ### User Stories Completed
